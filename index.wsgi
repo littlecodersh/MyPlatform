@@ -1,4 +1,4 @@
-from client import app
+from app import app
 import sae
 
 #app.debug = True

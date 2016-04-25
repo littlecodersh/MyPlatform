@@ -13,7 +13,7 @@ def deal_with_msg(xmlMsg):
     content = xmlRecv.find("Content").text
     baseReply = '<xml><ToUserName><![CDATA[%s]]></ToUserName><FromUserName><![CDATA[%s]]></FromUserName><CreateTime>%s</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[%s]]></Content></xml>'
     baseReply = baseReply%('%s', toUserName, str(int(time.time())), '%s')
-    if authAdmin(fromUserName, content): return reply(fromUserName, baseReply, u'很高兴为你服务，樵夫')
+    if authAdmin(fromUserName, content): return reply(fromUserName, baseReply, u'很高兴为你服务')
     content += fromUserName
     if fromUserName == robotValue['adminUserName']:
         return reply(fromUserName, baseReply, u'收到指令: %s'%content)

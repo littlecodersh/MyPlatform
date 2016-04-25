@@ -1,6 +1,6 @@
 import requests
 
-url = 'http://geoffcmdwechat.applinzi.com/?signature=3dd211ac4759a4765558e89acd5ea82dcb693e82&timestamp=1459853751&nonce=1886306063'
+url = 'http://127.0.0.1/?signature=3dd211ac4759a4765558e89acd5ea82dcb693e82&timestamp=1459853751&nonce=1886306063'
 data = '''
 <xml>
 <ToUserName><![CDATA[toUser]]></ToUserName>
