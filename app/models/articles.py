@@ -35,6 +35,10 @@ def output_articles_json(articlesDir, articlesName):
     with open(os.path.join('app', 'models', articlesName), 'w') as f: f.write(json.dumps(aj))
     return True
 
+def get_articles(articlesName):
+    with open(os.path.join('app', 'models', articlesName)) as f:
+        return json.loads(f.read())
+
 if __name__ == '__main__':
     url = 'http://www.baidu.com'
     # url = 'https://mp.weixin.qq.com/s?__biz=MjM5ODIyMTE0MA==&mid=2650968201&idx=1&sn=d3f7f393f5e9adf881357c58e75d9a26'

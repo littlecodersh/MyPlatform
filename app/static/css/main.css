@@ -1,0 +1,56 @@
+body{
+    list-style-type: none;
+    margin: 0;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    font-size: 8px;
+}
+#tab-list{
+    font-size: 14px;
+}
+#contents{
+    height: auto;
+}
+#content-list{
+    padding-left: 0;
+}
+#content-list li:hover{
+    background: aliceblue;
+}
+.a-entry{
+    height: 100px;
+    display: block;
+    overflow: hidden;
+}
+.a-title{
+    float: left;
+    position: relative;
+    padding-top: 5px;
+    padding-left: 5px;
+    margin-left: 100px;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 200;
+}
+.a-brief {
+    float: left;
+    clear: left;
+    position: relative;
+    padding-left: 5px;
+    margin-left: 100px;
+}
+.a-img {
+    position: absolute;
+    margin-left: 5px;
+    left: 0;
+    padding-top: 3px;
+    height: 95px;
+    width: 95px;
+}
+
+.nav-justified > li {
+    display: table-cell;
+    width: 1%;
+}
+.nav-justified > li > a {
+    margin-bottom: 0;
+}
