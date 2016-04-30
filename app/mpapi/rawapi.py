@@ -17,6 +17,8 @@ except:
     def set_mc(j):
         with open(TOKEN_DIR, 'w') as f: return f.write(j)
 
+__all__ = ['api']
+
 class AccessToken(object):
     def __init__(self, appId = APP_ID, secretKey = SECRET_KEY):
         self.appId = appId
@@ -94,5 +96,3 @@ class ApiFramework(object):
         return requests.post(url, **kwargs)
 
 api = ApiFramework()
-
-__all__ = [api]

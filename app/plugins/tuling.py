@@ -4,7 +4,7 @@ import requests, json
 from config import TULING_KEY
 
 
-def get_response(msg, storageClass = None, userName = None, userid = 'ContentBasedWechatMP'):
+def get_reply(msg, storageClass = None, userName = None, userid = 'ContentBasedWechatMP'):
     url = 'http://www.tuling123.com/openapi/api'
     payloads = {
         'key': TULING_KEY,
@@ -36,4 +36,4 @@ def get_response(msg, storageClass = None, userName = None, userid = 'ContentBas
 if __name__ == '__main__':
     while True:
         a = raw_input('>').decode(sys.stdin.encoding).encode('utf8')
-        print get_response(a, 'ContentBasedWechatMP')
+        print get_reply(a, 'ContentBasedWechatMP')
