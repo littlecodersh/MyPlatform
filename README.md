@@ -12,15 +12,15 @@ MyPlatform 是个最大化简便个人搭建微信平台(WechatMP)后台的项�
 
 完成配置以后的微信个人公众号会是这个样子，你可以体验一下。（本号不更新，仅作演示用途）
 
-![QRCode](http://7xrip4.com1.z0.glb.clouddn.com/ItChat%2FQRCode2.jpg?imageView/2/w/400/)
+![QRCode](http://7xrip4.com1.z0.glb.clouddn.com/MyPlatform%2F%E6%BC%94%E7%A4%BA%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg?imageView/2/w/400/)
 
 ##Tutorial
 
-我提供了视频与文字的配置介绍：[视频]() [文字]()
+我提供了视频与文字的配置介绍：[视频]() [文字](https://github.com/littlecodersh/MyPlatform/wiki/Deploy)
 
 ##Download
 
-你可以选择直接`git clone`或者在[360云盘()]()下载。
+你可以选择直接`git clone`或者在[这里](https://github.com/littlecodersh/MyPlatform/archive/master.zip)下载。
 
 ##FAQ
 
