@@ -1,2 +1,12 @@
-http://mp.weixin.qq.com/s?__biz=MzAwMTUyMjQ5OA==&mid=2650962226&idx=1&sn=6b0a08deaffcd43e5c58c06c12553102
-https://mp.weixin.qq.com/s?__biz=MjM5ODIyMTE0MA==&mid=2650968201&idx=1&sn=d3f7f393f5e9adf881357c58e75d9a26
+####################################################################################
+# 以#开始的内容为注释，不会被处理                                                  #
+# 文档靠下的内容将会优先被显示（在列表最上面）                                     #
+# 有更多问题欢迎访问我的主页https://github.com/littlecodersh/MyPlatform            #
+####################################################################################
+
+# 关于「我的病就是中医给治好的」
+# https://mp.weixin.qq.com/s?__biz=MjM5ODIyMTE0MA==&mid=2650968201&idx=1&sn=d3f7f393f5e9adf881357c58e75d9a26
+# 青年魏则西之死
+http://mp.weixin.qq.com/s?__biz=MjM5ODIyMTE0MA==&mid=2650968235&idx=1&sn=6c99a7f680af5679215ae09351bf9f1d
+# 虚假医疗广告面前，你我终将无法独善其身
+# http://mp.weixin.qq.com/s?__biz=MjM5ODIyMTE0MA==&mid=2650968237&idx=1&sn=9fbcd3ee206a6561e5514edb4dc84119

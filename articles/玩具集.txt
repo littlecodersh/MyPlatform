@@ -1,0 +1,14 @@
+####################################################################################
+# 以#开始的内容为注释，不会被处理                                                  #
+# 文档靠下的内容将会优先被显示（在列表最上面）                                     #
+# 有更多问题欢迎访问我的主页https://github.com/littlecodersh/MyPlatform            #
+####################################################################################
+
+# 使用Python操作Evernote API
+http://mp.weixin.qq.com/s?__biz=MjM5NzU0MzU0Nw==&mid=403116688&idx=2&sn=cfae536be14881d69a37af5a8cf84711
+# 用OpenCV与Face++实现人脸解锁
+http://mp.weixin.qq.com/s?__biz=MzA4MjEyNTA5Mw==&mid=405079862&idx=2&sn=9fc611dd7b817a75e6329dcdfcb783ce
+# 用Python配合Evernote完成每周工作安排
+http://mp.weixin.qq.com/s?__biz=MzA4MjEyNTA5Mw==&mid=2652563520&idx=2&sn=5bb0c6fb669d6ba887996e69041b733f
+# 手把手教你扩展个人微信号（1）
+http://mp.weixin.qq.com/s?__biz=MzIzNjM2MTE4MA==&mid=2247483653&idx=1&sn=3ecdf60c4d9f5979d14179731d571666

@@ -29,6 +29,7 @@ def output_articles_json(articlesDir, articlesName):
         aj[k] = []
         with open(os.path.join(articlesDir, urlFile)) as f:
             for url in f:
+                if url[0] in ('\n', '#'): continue
                 detail = get_detail_from_url(url.strip())
                 if detail is None: return False
                 aj[k].insert(0, detail)

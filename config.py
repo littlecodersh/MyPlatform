@@ -13,7 +13,7 @@ WELCOME_WORD = u'''\
 其他： 图灵机器人会陪你聊天'''
 INDEX_URL = 'www.baidu.com'
 REPLY_DICT = {
-    u'目录': INDEX_URL,
+    u'目录': '点这里-> ' + INDEX_URL,
     u'帮助': WELCOME_WORD,
 }
 MENU = {}
