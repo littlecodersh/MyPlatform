@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta charset="UTF-8">
     <title>文章列表</title>
     <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet"/>
@@ -11,127 +11,147 @@
     <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
 </head>
 <body>
-    <ul class="nav nav-pills nav-justified" id="tab-list"></ul>
-    <ul id="content-list"></ul>
+<ul class="nav nav-pills nav-justified" id="tab-list"></ul>
+<ul id="content-list"></ul>
 
-    <script type="text/javascript">
-        var arrContents = [];    // 数组存储条目信息
-        var lastGetTime;   // 服务器传回
-        var iNumTabs;   // 标题标签数量
-        var i;
+<script type="text/javascript">
+    var arrContents = [];    // 数组存储条目信息
+    var lastGetTime;   // 服务器传回
+    var iNumTabs;   // 标题标签数量
+    var i;
 
-        // 构造条目Dom
-        createDomEntry = function(infoEntry){
-            var nEntry = $("<li></li>");
-            nEntry.addClass('a-entry');
-            nEntry.click(function () {
+    // 构造条目Dom
+    //        createDomEntry = function(infoEntry){
+    //            var nEntry = $("<li></li>");
+    //            nEntry.addClass('a-entry');
+    //            nEntry.click(function () {
+    //                window.location.href=infoEntry.url;  // 条目链接
+    //            });
+    //            var nTitle = $("<p>"+ infoEntry.txtTitle +"</p>");
+    //            nTitle.addClass('a-title');
+    //            var nBrief = $("<p>" + infoEntry.txtBrief + "</p>");
+    //            nBrief.addClass('a-brief');
+    //            var nImg;
+    //            nImg.html("showImg("+ infoEntry.urlImg + ");");
+    //
+    //            nEntry.append(nTitle, nBrief, nImg);
+    //
+    //            return nEntry;
+    //        };
+
+    createDomEntryStr = function (infoEntry) {
+        var strTitle = "<p class='a-title'>" + infoEntry.txtTitle + "</p>";
+        var strBrief = "<p class='a-brief'>" + infoEntry.txtBrief + "</p>";
+//        var strImg = "<div><script type='text/javascript'>showImg('" + infoEntry.urlImg + "');<" + "/script></div>";
+        var strImg = "<img class='a-img' alt='图片加载失败' src='" + showImg2(infoEntry.urlImg) + "'/>";
+        var strEntry = "<li class='a-entry'>" + strTitle + strBrief + strImg + "</li>";
+        nEntry = $(strEntry);
+        nEntry.click(function () {
                 window.location.href=infoEntry.url;  // 条目链接
             });
-            var nTitle = $("<p>"+ infoEntry.txtTitle +"</p>");
-            nTitle.addClass('a-title');
-            var nBrief = $("<p>" + infoEntry.txtBrief + "</p>");
-            nBrief.addClass('a-brief');
-            var nImg = $("<img></img>");
-            nImg.addClass('a-img');
-            nImg.attr('src',infoEntry.urlImg);  // 图片地址
-            nImg.attr('alt','图片未加载');
+        return nEntry;
+    };
 
-            nEntry.append(nTitle, nBrief, nImg);
+    // 构造条目信息对象
+    Entry = function (txtTitle, txtBrief, urlImg, url) {
+        var obj = {};
+        obj.txtTitle = txtTitle;
+        obj.txtBrief = txtBrief;
+        obj.urlImg = urlImg;
+        obj.url = url;
+        return obj;
+    };
 
-            return nEntry;
-        };
+    // 创建标题标签Dom
+    createDomTab = function (txtTitle, tabID) {
+        var nTab = $("<li></li>");
+        nTab.attr('id', 'tab' + tabID.toString());
 
-        // 构造条目信息对象
-        Entry = function (txtTitle, txtBrief, urlImg, url) {
-            var obj = {};
-            obj.txtTitle = txtTitle;
-            obj.txtBrief = txtBrief;
-            obj.urlImg = urlImg;
-            obj.url = url;
-            return obj;
-        };
-
-        // 创建标题标签Dom
-        createDomTab = function (txtTitle,tabID) {
-            var nTab = $("<li></li>");
-            nTab.attr('id','tab' + tabID.toString());
-
-            var aTab = $("<a></a>");
-            aTab.attr('href','#');
-            aTab.html(txtTitle);
-            aTab.click(function () {
-                switchSection(tabID);
-            });
-            nTab.append(aTab);
-            return nTab;
-        };
-
-        // 受标题标签点击调用，根据存储的条目数据，更新条目内容
-        switchSection = function (tabID) {
-
-            var content_list = $("#content-list");
-            // 为tab标签加上BootStrap的active类
-            for(i=1; i <= iNumTabs; i++){
-                $("#tab" + i.toString()).removeClass('active');
-            }
-            $("#tab" + tabID.toString()).addClass('active');
-
-            content_list.html('');
-            for (i = 0; i < arrContents[tabID-1].length; i++) {
-                content_list.append(createDomEntry(arrContents[tabID - 1][i]));
-            }
-        };
-
-        // 异步获取数据，一次性获取所有
-        getEntries = function () {
-            $.ajax({
-                type:"get",
-                url:"/articles_list/contents/",
-                async:true,
-                dataType: 'json',
-                success: function(response){
-                    response = response.response;
-
-                    // 清空初始化
-                    arrContents = [];
-                    $("#content-list").html('');
-
-                    // 获取服务器传出，数据存入array
-                    var tab_list = $("#tab-list");
-                    var sectionID = 0;
-                    for(var section in response){
-                        if(section.toString()=="time"){
-                            lastGetTime = response[section];
-                        }else{
-                            // 构建标题并加入Dom
-                            sectionID++;
-                            tab_list.append(createDomTab(section, sectionID));
-
-                            // 内容数据存入arrContents
-                            var arrSection = [];
-                            section = response[section];
-                            for(i=0; i < section.length; i++){
-                                var txtTitle = section[i]['title'];
-                                var txtBrief = section[i]['summary'];
-                                var urlImg = 'http://www.zorhand.com/img?url='+section[i]['pic_url'];
-                                var url = section[i]['url'];
-                                var nEntry = Entry(txtTitle, txtBrief, urlImg, url);
-                                arrSection.push(nEntry);
-                            }
-                            arrContents.push(arrSection);
-                        }
-                    }
-                    iNumTabs = sectionID;
-                    switchSection(1);
-                }
-            });
-        };
-
-        $(document).ready(function () {
-            getEntries();   // 向服务器获取数据
-
+        var aTab = $("<a></a>");
+        aTab.attr('href', '#');
+        aTab.html(txtTitle);
+        aTab.click(function () {
+            switchSection(tabID);
         });
-    </script>
+        nTab.append(aTab);
+        return nTab;
+    };
+
+    // 受标题标签点击调用，根据存储的条目数据，更新条目内容
+    switchSection = function (tabID) {
+        // 为tab标签加上BootStrap的active类
+        for (i = 1; i <= iNumTabs; i++)
+            $("#tab" + i.toString()).removeClass('active');
+        $("#tab" + tabID.toString()).addClass('active');
+
+        var content_list = $("#content-list");
+        content_list.html('');
+        for (i = 0; i < arrContents[tabID - 1].length; i++)
+//            content_list.html(content_list.html() + createDomEntryStr(arrContents[tabID - 1][i]));
+            content_list.append(createDomEntryStr(arrContents[tabID - 1][i]));
+    };
+
+    // 微信外链图片显示
+    function showImg(url) {
+        var frameid = 'frameimg' + Math.random();
+        window.img = '<img id="img" style="width:50%" src=\'' + url + '?' + Math.random() + '\' /><script>window.onload = function() { parent.document.getElementById(\'' + frameid + '\').height = document.getElementById(\'img\').height+\'px\'; }<' + '/script>';
+        var content_list = $("#content-list");
+        document.write('<iframe id="' + frameid + '" src="javascript:parent.img;" frameBorder="0" scrolling="no" width="50%"></iframe>');
+    }
+    function showImg2(url) {
+        return "https://o6kyd0ndv.qnssl.com" + url.substring(20);
+    }
+
+    // 异步获取数据，一次性获取所有
+    getEntries = function () {
+        $.ajax({
+            type: "get",
+            url: "/articles_list/contents/",
+            async: true,
+            dataType: 'json',
+            success: function (response) {
+                response = response.response;
+
+                // 清空初始化
+                arrContents = [];
+                $("#content-list").html('');
+
+                // 获取服务器传出，数据存入array
+                var tab_list = $("#tab-list");
+                var sectionID = 0;
+                for (var section in response) {
+                    if (!response.hasOwnProperty(section)) continue;
+                    if (section.toString() == "time") {
+                        lastGetTime = response[section];
+                    } else {
+                        // 构建标题并加入Dom
+                        sectionID++;
+                        tab_list.append(createDomTab(section, sectionID));
+
+                        // 内容数据存入arrContents
+                        var arrSection = [];
+                        section = response[section];
+                        for (i = 0; i < section.length; i++) {
+                            var txtTitle = section[i]['title'];
+                            var txtBrief = section[i]['summary'];
+                            var urlImg = section[i]['pic_url'];
+                            var urlEntry = section[i]['url'];
+                            var nEntry = Entry(txtTitle, txtBrief, urlImg, urlEntry);
+                            arrSection.push(nEntry);
+                        }
+                        arrContents.push(arrSection);
+                    }
+                }
+                iNumTabs = sectionID;
+                switchSection(1);
+            }
+        });
+    };
+
+    $(document).ready(function () {
+        getEntries();   // 向服务器获取数据
+    });
+</script>
 
 </body>
 </html>
